@@ -7,6 +7,9 @@ public class AsteroidsGame extends Applet implements Runnable {
 	int x, y;
 	Thread thread;
 	long startTime, endTime, framePeriod;
+	Dimension dim; // Stores the size of the back buffer
+	Image img; // the back buffer object
+	Graphics g; // used to draw on the back buffer.
 
 	public void init() {
 		this.resize(500, 500);
@@ -14,17 +17,20 @@ public class AsteroidsGame extends Applet implements Runnable {
 		y = 0; // the screen
 		startTime = 0;
 		endTime = 0;
-		framePeriod = 25; // 25 milliseconds is a good framePeriod (because the
-							// humans can't go beyond this
+		framePeriod = 25; // 25 milliseconds is a good framePeriod
+		dim = getSize(); // set dim equal to the dimensions of the applet
+		img = createImage(dim.width, dim.height); // create the back buffer
+		g = img.getGraphics(); // retrieve the back buffer and place into g;
 		thread = new Thread(this); // create the thread
 		thread.start(); // start the thread
 	}
 
-	public void paint(Graphics gfx) {
-		gfx.setColor(Color.black);
-		gfx.fillRect(0, 0, 500, 500);
-		gfx.setColor(Color.red);
-		gfx.fillOval(0, 0, 50, 50);
+	public void paint(Graphics gfx) {	
+		g.setColor(Color.black);
+		g.fillRect(0, 0, 500, 500);
+		g.setColor(Color.red);
+		g.fillOval(x, y, 50, 50);
+		gfx.drawImage(img, 0, 0, this);
 	}
 
 	public void update(Graphics gfx) {
