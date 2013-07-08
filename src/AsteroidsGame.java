@@ -4,19 +4,20 @@ import java.awt.event.*;
 
 public class AsteroidsGame extends Applet implements Runnable, KeyListener {
 
-	int x, y, xVelocity, yVelocity;
 	Thread thread;
 	long startTime, endTime, framePeriod;
 	Dimension dim; // Stores the size of the back buffer
 	Image img; // the back buffer object
 	Graphics g; // used to draw on the back buffer.
+	Ship ship;
+	boolean paused;
 
 	public void init() {
 		this.resize(500, 500);
-		x = 225; // the coordinates of our red circle on
-		y = 225; // the screen
-		xVelocity = 0;
-		yVelocity = 0;
+
+		ship = new Ship(250, 250, 0, 0.35, .98, .1, 12);
+		paused = false;
+
 		addKeyListener(this);
 		startTime = 0;
 		endTime = 0;
@@ -31,8 +32,7 @@ public class AsteroidsGame extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics gfx) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, 500, 500);
-		g.setColor(Color.red);
-		g.fillOval(x, y, 50, 50);
+		ship.draw(g);
 		gfx.drawImage(img, 0, 0, this);
 	}
 
@@ -43,8 +43,9 @@ public class AsteroidsGame extends Applet implements Runnable, KeyListener {
 	public void run() {
 		for (;;) {
 			startTime = System.currentTimeMillis();
-			x += xVelocity;
-			y += yVelocity;
+			if (!paused) {
+				ship.move(dim.width, dim.height);
+			}
 			repaint();
 			try {
 				endTime = System.currentTimeMillis();
@@ -56,29 +57,56 @@ public class AsteroidsGame extends Applet implements Runnable, KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-			yVelocity = -1; // subtracting from y moves it upwards
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-			yVelocity = 1;
-		else if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			xVelocity = -1; // subtracting from x moves it left
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			xVelocity = 1;
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (!ship.isActive() && !paused) {
+				ship.setActive(true);
+			} else {
+				paused = !paused;
+				if (paused)
+					ship.setActive(false);
+				else
+					ship.setActive(true);
+			}
+		} else if (paused || !ship.isActive()) {
+			return;
+		}
 
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+
+			ship.setAccelerating(true);
+
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+			ship.setTurningLeft(true);
+
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
+			ship.setTurningRight(true);
+
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_UP
-				|| e.getKeyCode() == KeyEvent.VK_DOWN)
-			yVelocity = 0;
-		else if (e.getKeyCode() == KeyEvent.VK_LEFT
-				|| e.getKeyCode() == KeyEvent.VK_RIGHT)
-			xVelocity = 0;
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+
+			ship.setAccelerating(false);
+
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+			ship.setTurningLeft(false);
+
+		}
+
+		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+			ship.setTurningRight(false);
+
+		}
 	}
 
 	public void keyTyped(KeyEvent e) {
 		// empty method, but still needed to implement the KeyListener
-		// interface.
+		// interface. And useful for things when inputting text is used.
 	}
 
 }

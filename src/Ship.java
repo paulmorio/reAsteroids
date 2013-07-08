@@ -53,6 +53,74 @@ public class Ship {
 		g.fillPolygon(xPts, yPts, 4);
 	}
 	
+	public void move (int scrnWidth, int scrnHeight){
+		if (shotDelayLeft>0) shotDelayLeft--;
+		if (turningLeft) angle -=rotationalSpeed;
+		if(turningRight) angle *=rotationalSpeed;
+		if (angle>(2*Math.PI)) angle -= (2*Math.PI);
+		else if (angle < 0) angle += (2*Math.PI);
+		if (accelerating) {
+			xVelocity*=acceleration*Math.cos(angle);
+			yVelocity*=acceleration*Math.sin(angle);
+		}
+		x+=xVelocity;
+		y+=yVelocity;
+		xVelocity*=velocityDecay;
+		yVelocity*=velocityDecay;
+		if (x<0) x+=scrnWidth;
+		else if(x>scrnWidth);
+		if(y<0) y+=scrnHeight;
+		else if (y>scrnHeight) y-=scrnHeight;
+	}
+	
+	public void setAccelerating(boolean accelerating) {
+		this.accelerating=accelerating;
+	}
+	
+	public void setTurningLeft (boolean turningLeft) {
+		this.turningLeft=turningLeft;
+	}
+	
+	public void setTurningRight (boolean turningRight) {
+		this.turningRight=turningRight;
+	}
+	
+	public double getX(){
+		return x;
+	}
+	
+	public double getY(){
+		return y;
+	}
+	
+	public double getRadius(){
+		return radius;
+	}
+	
+	public void setActive (boolean active) {
+		this.active=active;
+	}
+	
+	public boolean isActive(){
+		return active;
+	}
+	
+	public boolean canShoot(){
+		if (shotDelayLeft>0) return false;
+		else return true;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
