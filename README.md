@@ -1,6 +1,13 @@
+
+
+**THIS PROJECT WILL BE ON HOLD UNTIL I GET MY WORK SORTED OUT**
+
+
 ======================
 README FOR REASTEROIDS
 ======================
+This little game is heavily based on *A Guide to Programming Asteroids as a Java Applet" by Brandon Carroll as I
+used this guide to learn Java.
 
 Contents:
 1. Playing the Game
@@ -36,11 +43,6 @@ Shield = D Key
 KNOWN BUGS: 
 ============
 None
-
-=======
-LICENSE
-=======
-
 
 =======
 CONTACT
