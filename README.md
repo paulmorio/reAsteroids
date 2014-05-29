@@ -17,16 +17,16 @@ PLAYING THE GAME:
 -----------------
 CONTROLS:
 -----------------
-  - Controlling the Spaceship - 
+### Controlling the Spaceship ###
 
-Acceleration = Arrow Key Up
-Deceleration = Arrow Key Down
-Turn left = Arrow Key Left
-Turn Right = Arrow Key Right
+* Acceleration = Arrow Key Up
+* Deceleration = Arrow Key Down
+* Turn left = Arrow Key Left
+* Turn Right = Arrow Key Right
 
-  - Firing the Weapons - 
+### Firing Controls ###
+* Fire = Spacebar
 
-Fire = Spacebar
 
 
 
