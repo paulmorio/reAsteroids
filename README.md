@@ -9,12 +9,12 @@ Contents:
 1. Playing the Game
 2. Controls
 
--------------------------------
-PLAYING THE GAME:
--------------------------------
-  - On Linux, click on the .sh file to begin the game. 
 
+PLAYING THE GAME:
 -----------------
+On Linux, click on the .sh file to begin the game. 
+
+
 CONTROLS:
 -----------------
 ### Controlling the Spaceship ###
