@@ -1,9 +1,7 @@
-** Will work on as soon as I find time again **
-
 =========================
 README FOR REASTEROIDS
 =========================
-This little game is heavily based on *A Guide to Programming Asteroids as a Java Applet* by Brandon Carroll as I used this guide to learn Java.
+This little game is heavily based on *A Guide to Programming Asteroids as a Java Applet* by Brandon Carroll as I used this guide to learn Java. It is a more pure java approach than the previous attempt which involved input from classmates
 
 Contents:
 1. Playing the Game
